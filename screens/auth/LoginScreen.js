@@ -18,13 +18,11 @@ const initialState = {
 	password: "",
 };
 
-export default function App() {
+export default function LoginScreen() {
 	const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 	const [state, setstate] = useState(initialState);
 
 	const [dimensions, setdimensions] = useState(Dimensions.get("window").width);
-
-	console.log(state);
 
 	useEffect(() => {
 		const onChange = () => {
@@ -44,6 +42,7 @@ export default function App() {
 	const onSubmit = () => {
 		setIsShowKeyboard(false);
 		Keyboard.dismiss();
+		console.log(state);
 		setstate(initialState);
 	};
 
@@ -67,7 +66,7 @@ export default function App() {
 								...styles.form,
 								width: dimensions,
 								paddingBottom: isShowKeyboard ? 0 : 144,
-								marginBottom: isShowKeyboard ? -60 : 0,
+								marginBottom: isShowKeyboard ? -92 : 0,
 							}}
 						>
 							<View style={styles.header}>
@@ -76,6 +75,7 @@ export default function App() {
 							<View style={{ marginBottom: 16 }}>
 								<TextInput
 									placeholder='Адресc электронной почты'
+									keyboardType='email-address'
 									style={styles.input}
 									textAlign={"left"}
 									onFocus={() => setIsShowKeyboard(true)}
@@ -111,6 +111,11 @@ export default function App() {
 							>
 								<Text style={styles.btnTitle}>Войти</Text>
 							</TouchableOpacity>
+							<View style={styles.link}>
+								<Text style={styles.linkText}>
+									Нет аккаунта? Зарегистрироваться
+								</Text>
+							</View>
 						</View>
 					</KeyboardAvoidingView>
 				</ImageBackground>
@@ -137,6 +142,8 @@ const styles = StyleSheet.create({
 		borderColor: "#E8E8E8",
 		borderRadius: 8,
 		color: "#212121",
+		fontSize: 16,
+		lineHeight: 19,
 	},
 
 	form: {
@@ -150,6 +157,7 @@ const styles = StyleSheet.create({
 
 	btn: {
 		padding: 16,
+		marginBottom: 16,
 		justifyContent: "center",
 		alignItems: "center",
 		marginHorizontal: 20,
@@ -159,6 +167,7 @@ const styles = StyleSheet.create({
 	btnTitle: {
 		color: "#FFFFFF",
 		fontSize: 18,
+		lineHeight: 19,
 		fontFamily: "Roboto-Regular",
 	},
 	header: {
@@ -167,7 +176,17 @@ const styles = StyleSheet.create({
 	},
 	headerTitle: {
 		fontSize: 30,
+		lineHeight: 35,
 		color: "#212121",
 		fontFamily: "Roboto-Medium",
+	},
+	link: {
+		alignItems: "center",
+	},
+
+	linkText: {
+		color: "#1B4371",
+		fontSize: 16,
+		lineHeight: 19,
 	},
 });
